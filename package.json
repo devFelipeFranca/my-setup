@@ -1,0 +1,9 @@
+{
+  "name": "learn-docker",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "cl":"./clean-docker.sh",
+    "co": "./connect.sh"
+  }
+}

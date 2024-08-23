@@ -6,14 +6,38 @@ RUN apt update && apt install -y \
 
 RUN mkdir /var/run/sshd
 
-RUN echo 'root:felpqwe' | chpasswd
+RUN echo 'root:password' | chpasswd
 
 RUN sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
-RUN apt update && apt install -y zsh && apt clean
+RUN apt update && apt install -y git && apt clean
 
-RUN chsh -s $(which zsh) root
+RUN apt update && apt install -y curl && apt clean
+
+RUN apt update && apt install -y wget && apt clean
+
+RUN apt update && apt install -y net-tools && apt clean
+
+RUN apt update && apt install -y htop && apt clean
+
+RUN apt update && apt install -y build-essential && apt clean
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+RUN apt update
+RUN apt install -y python3-pip
+
+COPY ./config-files/.ssh /root/.ssh
+COPY ./config-files/nvim/init.vim ./root/
+COPY ./config-files/initial-configs.sh ./root/
+COPY ./config-files/terminal-configs.sh ./root/
+
+RUN chmod +x ./root/initial-configs.sh
+RUN chmod +x ./root/terminal-configs.sh
+
+# RUN git clone git@ssh.dev.azure.com:v3/basf4SA/Suvinil/site-institucional-suvinil-frontend
+# RUN GIT_SSH_COMMAND='ssh -i .ssh/private_key' git clone git@ssh.dev.azure.com:v3/basf4SA/Suvinil/loja-suvinil-frontend
 
 EXPOSE 22
 
