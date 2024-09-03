@@ -36,9 +36,6 @@ COPY ./config-files/terminal-configs.sh ./root/
 RUN chmod +x ./root/initial-configs.sh
 RUN chmod +x ./root/terminal-configs.sh
 
-# RUN git clone git@ssh.dev.azure.com:v3/basf4SA/Suvinil/site-institucional-suvinil-frontend
-# RUN GIT_SSH_COMMAND='ssh -i .ssh/private_key' git clone git@ssh.dev.azure.com:v3/basf4SA/Suvinil/loja-suvinil-frontend
-
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
